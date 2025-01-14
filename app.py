@@ -1,12 +1,12 @@
 from flask import Flask, render_template, request, jsonify
-import sympy as sm
+#import sympy as sm
 import re  
 import json
 from mangum import Mangum
 
 # Existing code setup
 app = Flask(__name__)
-a, b, d, t, x, y, z = sm.symbols('a b d t x y z')
+#a, b, d, t, x, y, z = sm.symbols('a b d t x y z')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -25,7 +25,7 @@ def index():
         # Insert an asterisk between numbers and letters using regex
         expression = re.sub(r'(\d)([a-zA-Z])', r'\1*\2', expression)
 
-        try:
+        """try:
             expr = sm.sympify(expression)
             if operation == 'diff':
                 result = sm.diff(expr, x)
@@ -71,7 +71,7 @@ def index():
         except Exception as e:
             result = f"Error: {str(e)}"
             latex_result = None
-
+    """
     return render_template('index.html', result=result, expression=expression, latex_result=latex_result)
 
 handler = Mangum(app)
